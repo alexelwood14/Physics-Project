@@ -5,7 +5,7 @@ def draw_text(window, text, pos, size, colour, fontName, method):
     font = pygame.font.Font(pygame.font.match_font(fontName), int(size))
     text_surface = font.render(text, True, colour)
     text_rect = text_surface.get_rect()
-    
+
     if method == 'mt':
         text_rect.midtop = (pos[0], pos[1])
     elif method == 'c':
@@ -14,7 +14,7 @@ def draw_text(window, text, pos, size, colour, fontName, method):
         text_rect.midleft = (pos[0], pos[1])
     elif method == "mr":
         text_rect.midright = (pos[0], pos[1])
-        
+
     window.blit(text_surface, text_rect)
 
 #------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ class Slider():
                     self.slider_pos = 100
                 elif self.slider_pos < 0:
                     self.slider_pos = 0
-                    
+
             else:
                 self.grabbed = False
         else:
@@ -133,7 +133,7 @@ class Radio_Button(Button):
         else:
             self.highlighted = False
             return selected
-    
+
 
 class Single_Button(Button):
     def __init__(self, window, pos, size, text_size, text, colour_1, colour_2):
@@ -156,7 +156,7 @@ class Image_Button():
         self.size = size
         self.aspect = 3.5
         self.colours = colours
-        self.image = pygame.image.load("Assets\{}.jpg".format(image))
+        self.image = pygame.image.load("assets\{}.jpg".format(image))
         self.image = pygame.transform.scale(self.image, self.size)
         self.text = text
         self.text_size = text_size
@@ -188,7 +188,7 @@ class Image_Button():
         else:
             self.highlighted = False
         return False
-                                       
+
 
 #----------------------------------------------------------------------------------------------------------------------------------
 class Arrow_Button():
@@ -264,7 +264,7 @@ class Down_Arrow(Arrow_Button):
             pygame.draw.polygon(self.window, self.colour_1, [[self.pos[0] - self.size, self.pos[1] + self.size / 4],
                                                              [self.pos[0] + self.size, self.pos[1] + self.size / 4],
                                                              [self.pos[0], self.pos[1] + self.size + self.size / 4]])
-    
+
 #----------------------------------------------------------------------------------------------------------------------------------
 class Cross_Button():
     def __init__(self, window, pos, size, colour_1, colour_2):
@@ -337,22 +337,22 @@ class Ball_Creator():
         self.ball_colours = [colours["yellow"], colours["orange"], colours["red"],
                         colours["light_blue"], colours["blue"], colours["green"],
                         colours["dark_green"], colours["purple"], colours["pink"]]
-        
+
         self.delete = Cross_Button(window, [pos[0] + resolution[1]/27*14, pos[1]], resolution[1]/36, colours["red"], colours["white"])
-        
+
         self.colour_up = Up_Arrow(window, [pos[0] - resolution[1]/2.16, pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
         self.colour_down = Down_Arrow(window, [pos[0] - resolution[1]/2.16, pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
-        
+
         self.radius_up = Up_Arrow(window, [pos[0], pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
         self.radius_down = Down_Arrow(window, [pos[0], pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
-        
+
         self.mass_up = Up_Arrow(window, [pos[0] + resolution[1]/54*19, pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
         self.mass_down = Down_Arrow(window, [pos[0] + resolution[1]/54*19, pos[1]], resolution[1]/54, colours["light_grey"], colours["grey"])
 
     def highlight(self, mouse_used, resolution):
         if self.delete.highlight(mouse_used):
             return True, True
-        
+
         elif self.colour_up.highlight(mouse_used):
             self.colour += 1
             if self.colour > len(self.ball_colours) - 1:
@@ -363,14 +363,14 @@ class Ball_Creator():
             if self.colour < 0:
                 self.colour = len(self.ball_colours) - 1
             return True, False
-                
+
         elif self.mass_up.highlight() and self.mass < 999:
             self.mass += 1
             return True, False
         elif self.mass_down.highlight() and self.mass > 1:
             self.mass -= 1
             return True, False
-            
+
         elif self.radius_up.highlight() and self.radius < resolution[1]/10.8:
             self.radius += 1
             return True, False
@@ -473,7 +473,7 @@ class Add_Creator():
 
     def set_pos(self, pos):
         self.pos = pos
-        
+
 #----------------------------------------------------------------------------------------------------------------------------------
 class Scroll_Bar():
     def __init__(self, window, pos, colour, resolution):
@@ -489,7 +489,7 @@ class Scroll_Bar():
         pygame.draw.rect(self.window, self.colour, [self.pos[0] - self.max/50, self.pos[1] - self.max/2, self.max/25, self.max], int(self.max/250))
         pygame.draw.rect(self.window, self.colour, [self.pos[0] - self.max/50, self.slider_pos + self.max/25, self.max/25, self.slider_size])
 
-    def dragging(self):        
+    def dragging(self):
         if pygame.mouse.get_pressed()[0]:
             mouse_pos = pygame.mouse.get_pos()
             if (mouse_pos[0] <= self.pos[0] + self.max/25 and mouse_pos[0] >= self.pos[0] and
@@ -502,7 +502,7 @@ class Scroll_Bar():
                     self.slider_pos = self.max - self.slider_size
                 elif self.slider_pos < 0:
                     self.slider_pos = 0
-                    
+
             else:
                 self.grabbed = False
         else:
