@@ -9,7 +9,6 @@ import pygame_ui
 import random
 from pygame.locals import *
 
-#----------------------------------------------------------------------------------------------------------------------------------
 def init_objects(window, resolution, border_inset, phy_consts, colours):
     
     #initiate sliders
